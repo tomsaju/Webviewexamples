@@ -11,6 +11,7 @@ import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.JavascriptInterface;
+import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -24,6 +25,7 @@ String html;
     private static final String TAG = "WebActivity";
     WebView customerPageView;
     String savedData = "";
+    String dummydatatoPost = "[{\"qname\":\"q1\",\"ans\":\"yes\",\"qtype\":\"radio\"},{\"qname\":\"q2\",\"ans\":\"no\",\"qtype\":\"radio\"},{\"qname\":\"q3\",\"ans\":\"damages\",\"qtype\":\"text\"},{\"qname\":\"q4\",\"ans\":\"Yes\",\"qtype\":\"textarea\"},{\"qname\":\"q5\",\"ans\":[\"damaged\",\"Shingles\"],\"qtype\":\"checkbox\"},{\"qname\":\"q6\",\"ans\":[\"Deterior\"],\"qtype\":\"checkbox\"}]";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +73,11 @@ String html;
 
             }
             public void onPageFinished(WebView view, String url) {
-
+               /* if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                    view.evaluateJavascript("setAnswers("+dummydatatoPost+")", null);
+                } else {
+                    view.loadUrl("javascript:setAnswers("+dummydatatoPost+")");
+                }*/
             }
 
 
@@ -141,7 +147,7 @@ String html;
                 public void run() {
 
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                        customerPageView.evaluateJavascript("setAnswers("+savedData+")", null);
+                        customerPageView.evaluateJavascript("setAnswers( '" + savedData + "')", null);
                     } else {
                         customerPageView.loadUrl("javascript:setAnswers("+savedData+")");
                     }

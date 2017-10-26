@@ -11,6 +11,7 @@ import android.widget.ListView;
 public class MainActivity extends AppCompatActivity {
     String[] mobileArray = {"simple","tables","form","responsive","original","more javascript"};
     String html;
+    String dummydatatoPost = "[{\"qname\":\"q1\",\"ans\":\"yes\",\"qtype\":\"radio\"},{\"qname\":\"q2\",\"ans\":\"no\",\"qtype\":\"radio\"},{\"qname\":\"q3\",\"ans\":\"damages\",\"qtype\":\"text\"},{\"qname\":\"q4\",\"ans\":\"Yes\",\"qtype\":\"textarea\"},{\"qname\":\"q5\",\"ans\":[\"damaged\",\"Shingles\"],\"qtype\":\"checkbox\"},{\"qname\":\"q6\",\"ans\":[\"Deterior\"],\"qtype\":\"checkbox\"}]";
 
     //////////////////////////////////
     String simple = "<HTML>\n" +
@@ -1127,7 +1128,7 @@ public class MainActivity extends AppCompatActivity {
             "     * @param {JSON string} answersSelected\n" +
             "     */\n" +
             "    function setAnswers(answers) {\n" +
-            "\n" +
+            " console.log('this is'+answers);"+
             "      try {\n" +
             "        var ansArr = JSON.parse(answers);\n" +
             "        for(var i = 0; i < ansArr.length; i++) {\n" +
@@ -1148,12 +1149,13 @@ public class MainActivity extends AppCompatActivity {
             "              }\n" +
             "            }\n" +
             "          }\n" +
+
             "        }\n" +
             "      } catch (e) {\n" +
+            " Android.showToast(e); "+
             "          alert('Invalid JSON input!');\n" +
             "          return false;\n" +
             "      }\n" +
-            " Android.showToast(); "+
             "    }\n" +
             "\n" +
             "</script>\n" +
@@ -1173,7 +1175,6 @@ public class MainActivity extends AppCompatActivity {
             "    </form>\n" +
             "  </body>\n" +
             "</html>";
-
 
 
 
